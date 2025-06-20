@@ -1,0 +1,24 @@
+using FluentValidation;
+using static EventMaster.Domain.Constants.DomainConstants.User;
+
+namespace EventMaster.Application.EntityRequests.Users.Commands.Login;
+
+public class LoginCommandValidator : AbstractValidator<LoginCommand>
+{
+    public LoginCommandValidator()
+    {
+        RuleFor(x => x.Email)
+            .NotEmpty()
+            .EmailAddress()
+            .WithMessage("Invalid email format.")
+            .MaximumLength(MaxEmailLength)
+            .WithMessage($"Email must not exceed {MaxEmailLength} characters.");
+
+        RuleFor(x => x.Password)
+            .NotEmpty()
+            .MinimumLength(MinPasswordLength)
+            .WithMessage($"Password must be at least {MinPasswordLength} characters long.")
+            .MaximumLength(MaxPasswordLength)
+            .WithMessage($"Password must not exceed {MaxPasswordLength} characters.");
+    }
+}
