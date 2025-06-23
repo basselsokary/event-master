@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventMaster.Application\EventMaster.Application.csproj" />
+    <ProjectReference Include="..\EventMaster.Application\Application.csproj" />
   </ItemGroup>
 
 </Project>

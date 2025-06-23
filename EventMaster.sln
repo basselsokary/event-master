@@ -5,13 +5,13 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{75D32286-1F88-41FD-8F16-C21755E90B09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMaster.API", "src\EventMaster.API\EventMaster.API.csproj", "{08A92978-E266-47D2-AAD5-9BCF2C5932B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "src\EventMaster.API\API.csproj", "{08A92978-E266-47D2-AAD5-9BCF2C5932B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMaster.Domain", "src\EventMaster.Domain\EventMaster.Domain.csproj", "{00ECEB0A-62BE-440B-A78D-82F09663DF23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\EventMaster.Domain\Domain.csproj", "{00ECEB0A-62BE-440B-A78D-82F09663DF23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMaster.Application", "src\EventMaster.Application\EventMaster.Application.csproj", "{8433CC44-7630-4BAB-A8F3-CDE84B4816BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\EventMaster.Application\Application.csproj", "{8433CC44-7630-4BAB-A8F3-CDE84B4816BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMaster.Infrastructure", "src\EventMaster.Infrastructure\EventMaster.Infrastructure.csproj", "{A90BFABD-786D-4254-99BE-662AE5CC2969}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\EventMaster.Infrastructure\Infrastructure.csproj", "{A90BFABD-786D-4254-99BE-662AE5CC2969}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{9F069DDB-D80A-4EBA-A17B-028AF5AE3616}"
 EndProject
