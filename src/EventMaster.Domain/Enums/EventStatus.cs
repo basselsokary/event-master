@@ -2,7 +2,7 @@ namespace EventMaster.Domain.Enums;
 
 public enum EventStatus : byte
 {
-    Pending,
+    Pending = 1,
     Approved,
     Rejected
 }

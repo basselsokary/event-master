@@ -3,6 +3,8 @@ using EventMaster.Application;
 using EventMaster.Application.Hubs.Notification;
 using EventMaster.Infrastructure.Context;
 using Microsoft.AspNetCore.Identity;
+using EventMaster.Infrastructure.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventMaster.API;
 
@@ -22,6 +24,13 @@ public class Program
         using (var scope = app.Services.CreateScope())
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            // var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+
+            // var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            // context.Database.EnsureCreated();
+            // context.Database.EnsureDeleted();
+            // context.Database.Migrate();
+
             await DatabaseSeeder.SeedAsync(roleManager);
         }
 
@@ -34,6 +43,8 @@ public class Program
 
         #region Middlewares
         // app.UseCors("AllowAllOrigins");
+        app.UseExceptionHandler();
+        
         app.UseCors();
 
         app.UseRouting();

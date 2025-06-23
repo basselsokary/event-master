@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using EventMaster.API.Infrustructure;
+using Microsoft.OpenApi.Models;
 
 namespace EventMaster.API;
 
@@ -6,6 +7,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
+
         services.AddSwaggerGen();
 
         services.AddSignalR();
@@ -69,7 +73,7 @@ public static class DependencyInjection
 
             options.AddDefaultPolicy(policy =>
             {
-                policy.WithOrigins("http://localhost:5173") // Replace with your frontend origin
+                policy.WithOrigins("http://127.0.0.1:5500") // Replace with your frontend origin
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials(); // Required for SignalR with authentication or cookies

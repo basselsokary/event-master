@@ -2,5 +2,8 @@
 
 public interface INotificationClient
 {
-    Task ReceiveEventUpdates(string message);
+    Task EventUpdated(string message);
+    Task JoinedEventGroup(string message);
+    Task LeftEventGroup(string message);
+    Task Connected(string message);
 }

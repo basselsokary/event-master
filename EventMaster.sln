@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{75D32286-1F88-41FD-8F16-C21755E90B09}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMaster.API", "src\EventMaster.API\EventMaster.API.csproj", "{08A92978-E266-47D2-AAD5-9BCF2C5932B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMaster.Domain", "src\EventMaster.Domain\EventMaster.Domain.csproj", "{00ECEB0A-62BE-440B-A78D-82F09663DF23}"
@@ -42,6 +44,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08A92978-E266-47D2-AAD5-9BCF2C5932B1} = {75D32286-1F88-41FD-8F16-C21755E90B09}
+		{00ECEB0A-62BE-440B-A78D-82F09663DF23} = {75D32286-1F88-41FD-8F16-C21755E90B09}
+		{8433CC44-7630-4BAB-A8F3-CDE84B4816BC} = {75D32286-1F88-41FD-8F16-C21755E90B09}
+		{A90BFABD-786D-4254-99BE-662AE5CC2969} = {75D32286-1F88-41FD-8F16-C21755E90B09}
+		{9F069DDB-D80A-4EBA-A17B-028AF5AE3616} = {75D32286-1F88-41FD-8F16-C21755E90B09}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933B3E05-264F-4A0D-A6C8-B2FD79317ADE}

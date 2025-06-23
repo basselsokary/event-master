@@ -1,34 +1,91 @@
-﻿using EventMaster.Application.Common.Interfaces.Repositories;
-using EventMaster.Application.Common.Interfaces.Services;
+﻿using EventMaster.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.SignalR;
 
 namespace EventMaster.Application.Hubs.Notification;
 
-internal class NotificationSerice(
-    IHubContext<NotificationHub, INotificationClient> hubContext,
-    IUnitOfWork unitOfWork) : INotificationService
+internal class NotificationService : INotificationService
 {
-    private readonly IHubContext<NotificationHub, INotificationClient> _hubContext = hubContext;
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IHubContext<NotificationHub> _hubContext;
 
-    public async Task SendEventAttachmentsUpdateAsync(Guid eventId, CancellationToken cancellationToken = default)
+    public NotificationService(IHubContext<NotificationHub> hubContext)
     {
-        var participantIds = await _unitOfWork.Tickets.GetAllProjectedAsync(
-            filter: t => t.EventId == eventId,
-            selector: t => new { ParticipantIds = t.ParticipantId },
-            cancellationToken: cancellationToken
-        );
-        if (participantIds == null)
-            return;
-            
-        // foreach (var id in participantIds)
-        // {
-        //     Console.WriteLine($"Participant Id: {id}");
-        //     await _hubContext.Clients.User(id).ReceiveEventUpdates($"Attachment has been updated to event {eventEntity.Title}");
-        // }
+        _hubContext = hubContext;
+    }
 
-        Console.WriteLine("Send to all clients");
-        await _hubContext.Clients.All.ReceiveEventUpdates($"Attachment has been updated to event {eventId}");
-        // await _hubContext.Clients.Users([.. participantIds]).ReceiveEventUpdates($"Attachment has been {str} to event {eventEntity.Title}");
+    public async Task NotifyEventUpdate(
+        Guid eventId,
+        string eventTitle,
+        string message,
+        object? data = null,
+        CancellationToken cancellationToken = default)
+    {
+        var notification = new EventNotification
+        {
+            EventId = eventId,
+            EventTitle = eventTitle,
+            Message = message,
+            NotificationType = "updated",
+            Data = data
+        };
+
+        Console.WriteLine($"Sending notification for event {eventId}: {message}");
+
+        await _hubContext.Clients.Group($"event_{eventId}")
+            .SendAsync("EventUpdated", notification, cancellationToken);
+    }
+
+    public async Task NotifyEventCancelled(
+        Guid eventId,
+        string eventTitle,
+        string reason = "",
+        CancellationToken cancellationToken = default)
+    {
+        var notification = new EventNotification
+        {
+            EventId = eventId,
+            EventTitle = eventTitle,
+            Message = $"Event '{eventTitle}' has been cancelled. {reason}",
+            NotificationType = "cancelled"
+        };
+
+        await _hubContext.Clients.Group($"event_{eventId}")
+            .SendAsync("EventCancelled", notification, cancellationToken);
+    }
+
+    public async Task NotifyNewParticipant(
+        Guid eventId,
+        string eventTitle,
+        string participantName,
+        CancellationToken cancellationToken = default)
+    {
+        var notification = new EventNotification
+        {
+            EventId = eventId,
+            EventTitle = eventTitle,
+            Message = $"{participantName} joined the event!",
+            NotificationType = "participant_joined",
+            Data = new { ParticipantName = participantName }
+        };
+
+        await _hubContext.Clients.Group($"event_{eventId}")
+            .SendAsync("ParticipantJoined", notification, cancellationToken);
+    }
+
+    public async Task NotifyEventReminder(
+        Guid eventId,
+        string eventTitle,
+        string reminderMessage,
+        CancellationToken cancellationToken = default)
+    {
+        var notification = new EventNotification
+        {
+            EventId = eventId,
+            EventTitle = eventTitle,
+            Message = reminderMessage,
+            NotificationType = "reminder"
+        };
+
+        await _hubContext.Clients.Group($"event_{eventId}")
+            .SendAsync("EventReminder", notification, cancellationToken);
     }
 }

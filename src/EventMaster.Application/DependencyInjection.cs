@@ -13,7 +13,7 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly, includeInternalTypes: true);
 
-        services.AddScoped<INotificationService, NotificationSerice>();
+        services.AddScoped<INotificationService, NotificationService>();
 
         return services;
     }

@@ -2,7 +2,6 @@
 using EventMaster.Domain.Enums;
 using EventMaster.Domain.Errors;
 using EventMaster.Domain.Events;
-using EventMaster.Domain.Exceptions;
 using EventMaster.Domain.ValueObjects;
 using Shared.Models;
 
@@ -115,7 +114,7 @@ public class Event : BaseAuditableEntity, IAggregateRoot
         DateTime date)
     {
         if (string.IsNullOrWhiteSpace(title))
-            throw new System.ArgumentException("Title cannot be null or empty.", nameof(title));
+            throw new ArgumentException("Title cannot be null or empty.", nameof(title));
         if (string.IsNullOrWhiteSpace(description))
             throw new ArgumentException("Description cannot be null or empty.", nameof(description));
         if (string.IsNullOrWhiteSpace(venue))
@@ -123,15 +122,13 @@ public class Event : BaseAuditableEntity, IAggregateRoot
         if (string.IsNullOrWhiteSpace(location))
             throw new ArgumentException("Location cannot be null or empty.", nameof(location));
 
-        if (totalTickets <= TotalTickets)
-            throw new ArgumentOutOfRangeException(nameof(totalTickets), "Total tickets cannot be less than or equal to current tickets left.");
+        if (totalTickets < TotalTickets)
+            throw new ArgumentOutOfRangeException(nameof(totalTickets), "Total tickets cannot be less to current tickets left.");
 
         if (date == default || date < DateTime.UtcNow)
             throw new ArgumentException("Date must be set to valid value.", nameof(date));
-        else
-            // RaiseDomainEvent(new EventDateUpdatedEvent(this, date));
 
-            Title = title;
+        Title = title;
         Description = description;
         Venue = venue;
         Location = location;
@@ -142,6 +139,8 @@ public class Event : BaseAuditableEntity, IAggregateRoot
         TicketsLeft = totalTickets;
 
         Date = date;
+
+        RaiseDomainEvent(new EventUpdatedEvent(this));
     }
 
     public Result<EventAttachment> AddAttachment(EventAttachment attachment)

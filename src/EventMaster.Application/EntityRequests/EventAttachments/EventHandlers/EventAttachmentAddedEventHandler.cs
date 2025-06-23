@@ -12,8 +12,9 @@ public class EventAttachmentAddedEventHandler : INotificationHandler<EventAttach
         _notificationService = notificationService;
     }
 
-    public async Task Handle(EventAttachmentAddedEvent notification, CancellationToken cancellationToken)
+    public Task Handle(EventAttachmentAddedEvent notification, CancellationToken cancellationToken)
     {
-        await _notificationService.SendEventAttachmentsUpdateAsync(notification.Event.Id, cancellationToken);
+        // await _notificationService.SendEventAttachmentsUpdateAsync(notification.Event.Id, cancellationToken);
+        return Task.CompletedTask;
     }
 }
