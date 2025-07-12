@@ -29,6 +29,13 @@ EventMaster is structured according to Clean Architecture and DDD practices:
 - **Infrastructure Layer**: Handles EF Core, database, identity, and external services.
 - **API Layer**: Exposes HTTP endpoints and handles request/response formatting.
 
+Key design patterns and principles used:
+
+- **CQRS (Command Query Responsibility Segregation)**: Separates reads and writes for better scalability and clear responsibility.
+- **Repository Pattern**: Abstracts data access logic and encourages testability.
+- **Unit of Work**: Manages transactions across multiple repositories to ensure consistency.
+- **Result Pattern**: Provides a unified way to handle success/failure across the application without relying on exceptions, improving readability and flow control.
+
 ---
 
 ## Actors
@@ -109,7 +116,7 @@ The system includes a relational schema designed around DDD aggregates and norma
 - **Real-time**: SignalR
 - **Architecture**: Clean Architecture + Domain-Driven Design
 - **Validation**: FluentValidation
-- **Data Access**: CQRS, Repository with Unit of Work Pattern
+- **Data Access**: Generic repositories with Unit of Work
 
 <!-- ---
 
