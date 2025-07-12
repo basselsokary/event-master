@@ -104,7 +104,7 @@ The system includes a relational schema designed around DDD aggregates and norma
 ## Technology Stack
 
 - **Backend**: ASP.NET Core Web API (.NET 8)
-- **ORM**: Entity Framework Core (Code First)
+- **Database**: Entity Framework Core (Code First) with SQL Server.
 - **Authentication**: ASP.NET Identity + JWT
 - **Real-time**: SignalR
 - **Architecture**: Clean Architecture + Domain-Driven Design
