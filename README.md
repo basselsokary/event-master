@@ -16,7 +16,7 @@
 - [Real-Time Communication](#real-time-communication)
 - [Database Design](#database-design)
 - [Technology Stack](#technology-stack)
-- [Notes](#notes)
+<!-- - [Notes](#notes) -->
 
 ---
 
@@ -109,7 +109,7 @@ The system includes a relational schema designed around DDD aggregates and norma
 - **Real-time**: SignalR
 - **Architecture**: Clean Architecture + Domain-Driven Design
 - **Validation**: FluentValidation
-- **Data Access**: Generic repositories with Unit of Work
+- **Data Access**: CQRS, Repository with Unit of Work Pattern
 
 <!-- ---
 
