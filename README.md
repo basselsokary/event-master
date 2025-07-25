@@ -2,8 +2,6 @@
 
 **EventMaster** is a modular, scalable event management system designed using **Clean Architecture** and **Domain-Driven Design (DDD)** principles. It's designed to help users efficiently organize conferences, workshops, and community events.
 
----
-
 ## Table of Contents
 
 - [System Architecture](#system-architecture)
@@ -17,8 +15,6 @@
 - [Database Design](#database-design)
 - [Technology Stack](#technology-stack)
 <!-- - [Notes](#notes) -->
-
----
 
 ## System Architecture
 
@@ -36,15 +32,11 @@ Key design patterns and principles used:
 - **Unit of Work**: Manages transactions across multiple repositories to ensure consistency.
 - **Result Pattern**: Provides a unified way to handle success/failure across the application without relying on exceptions, improving readability and flow control.
 
----
-
 ## Actors
 
 - **Admin**: Oversees platform activity and content approval.
 - **Event Organizer**: Creates, manages, and tracks events.
 - **Participant**: Browses, registers for, and interacts with events.
-
----
 
 ## Features
 
@@ -54,14 +46,10 @@ Key design patterns and principles used:
 - Anonymous browsing for participants.
 - Role-based access control using Identity.
 
----
-
 ### Admin Capabilities
 
 - Review and approve/reject new Event Organizer accounts.
 - Review and approve/reject submitted events before public display.
-
----
 
 ### Participant Capabilities
 
@@ -72,8 +60,6 @@ Key design patterns and principles used:
 - Get real-time notifications and event updates.
 - Download event attachments (e.g., PDF flyers).
 
----
-
 ### Event Organizer Capabilities
 
 - Full CRUD access: **Create**, **Read**, **Update**, **Delete** events.
@@ -81,7 +67,9 @@ Key design patterns and principles used:
 - Send updates and notifications to registered participants.
 <!-- - View participant registration statistics. -->
 
----
+### Global Exception Handling 
+
+The API implements centralized exception handling to ensure consistent error responses. Specific exceptions such as **Validation**, **NotFound**, and **Unauthorized Access** are handled with tailored responses, while unexpected exceptions are caught and returned as generic error messages.
 
 ## Real-Time Communication
 
@@ -90,8 +78,6 @@ Built using **SignalR** for efficient real-time features:
 - Live notifications (admin actions, event updates).
 - Real-time event updates.
 - Organizer-to-participant announcements.
-
----
 
 ## Database Design
 
@@ -106,8 +92,6 @@ The system includes a relational schema designed around DDD aggregates and norma
 - **SavedEventItems**: Join table linking Baskets and Events.
 - **Notifications**: Real-time and system messages.
 
----
-
 ## Technology Stack
 
 - **Backend**: ASP.NET Core Web API (.NET 8)
@@ -118,8 +102,7 @@ The system includes a relational schema designed around DDD aggregates and norma
 - **Validation**: FluentValidation
 - **Data Access**: Generic repositories with Unit of Work
 
-<!-- ---
-
+<!--
 ## Notes
 
 - Designed for extensibility: modular, testable, and future-proof.
